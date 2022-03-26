@@ -1,3 +1,4 @@
-.idea/*
-
-
+.idea
+venv
+backend/migrations
+**/__pycache__
