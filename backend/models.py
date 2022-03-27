@@ -1,7 +1,9 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import UUID
 import datetime
 import uuid
+
+db = SQLAlchemy()
 
 class Person(db.Model):
     __tablename__ = 'person'
