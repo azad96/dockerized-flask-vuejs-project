@@ -5,6 +5,7 @@ import uuid
 
 db = SQLAlchemy()
 
+
 class Person(db.Model):
     __tablename__ = 'person'
 
