@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
-import Plate from '../components/Plate.vue';
+import Plates from '../components/Plates.vue';
 
 Vue.use(VueRouter);
 
@@ -13,8 +13,8 @@ const routes = [
   },
   {
     path: '/plate',
-    name: 'Plate',
-    component: Plate,
+    name: 'Plates',
+    component: Plates,
   },
 ];
 
