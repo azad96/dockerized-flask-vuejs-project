@@ -1,4 +1,5 @@
 .idea
 venv
 backend/migrations
+backend/init_tables.py
 **/__pycache__
