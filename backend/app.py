@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from config import user, password
 from models import db, Person, Plate, PersonPlate
+import json
 
 app = Flask(__name__)
 
@@ -30,7 +31,12 @@ def plate():
         return jsonify(list_of_permits)
 
     if request.method == 'POST':
-        return "PLATE GET REQUEST"
+        req = json.loads(list(dict(request.form).keys())[0])
+        print(req['plate_number'])
+        print(req['owner_name'])
+        print(req['start_date'])
+        print(req['end_date'])
+        return {'response': 'success'}
 
 
 # Start the app
