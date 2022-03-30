@@ -42,21 +42,30 @@ section {
   border-radius: 8px;
 }
 
+.date-block {
+  display: inline-block;
+  width: 60%;
+  padding: 5px;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
 .form-group {
   margin-top: 20px;
   font-size: 20px;
   color: #9e9e9e;
 }
 
-.form-group input,
-.form-group textarea {
-  width: 100%;
+.form-group input {
+  width: 60%;
   padding: 5px;
   font-size: 18px;
   border: 1px solid rgba(128, 128, 128, 0.199);
   margin-top: 5px;
+  margin-left: 10px;
 }
-
 
 textarea {
   resize: vertical;
