@@ -18,12 +18,11 @@ migrate = Migrate(app, db)
 @app.route('/plate', methods=['GET', 'POST'])
 def plate():
     if request.method == 'GET':
-        print('GET REQUEST')
         parking_permits = db.session.query(PersonPlate, Person, Plate).join(Person).join(Plate).all()
 
         list_of_permits = [{
-            "plate": plate_obj.plate_number,
             "owner": person_obj.name,
+            "plate_number": plate_obj.plate_number,
             "start_date": plate_obj.start_date,
             "end_date": plate_obj.end_date
         } for _, person_obj, plate_obj in parking_permits]
