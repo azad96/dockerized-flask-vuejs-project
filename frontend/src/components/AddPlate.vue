@@ -4,61 +4,64 @@
       <form @submit.prevent="$emit('on-submit', info)">
 
         <div class="form-group">
-           <label for="plate">Plate number:</label>
-          <input type="text" v-model="info.plate" required/>
+          <label for="plate-number">Plate number:</label>
+          <input type="text" v-model="info.plate_number" required/>
         </div>
 
         <div class="form-group">
-          <label for="name">Owner name:</label>
-          <input type="text" v-model="info.name"/>
+          <label for="owner-name">Owner name:</label>
+          <input type="text" v-model="info.owner_name"/>
         </div>
 
         <div class="form-group">
-          <label for="start_date">Start date:</label>
-          <datepicker v-model="info.start_date"></datepicker>
+          <label for="start-date">Start date:</label>
+          <input type="datetime-local" v-model="info.start_date" class="datepicker">
         </div>
 
         <div class="form-group">
-          <label for="end_date">End date:</label>
-          <datepicker v-model="info.end_date"></datepicker>
+          <label for="end-date">End date:</label>
+          <input type="datetime-local" v-model="info.end_date" class="datepicker">
         </div>
 
         <button type="submit" @click="addPlate()">Add Plate</button>
 
       </form>
     </div>
-
   </section>
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+import axios from 'axios';
 import moment from 'moment';
 
 export default {
   data() {
     return {
       info: {
-        plate: '',
-        name: '',
-        start_date: Date.now(),
-        end_date: Date.now(),
+        plate_number: '',
+        owner_name: '',
+        start_date: '',
+        end_date: '',
       },
     };
   },
   methods: {
     addPlate() {
       let plateInfo = {
-        plateNumber: this.info.plate,
-        ownerName: this.info.name,
-        startDate: moment(this.info.start_date).format('YYYY-MM-DDT00:00:00Z'),
-        endDate: moment(this.info.end_date).format('YYYY-MM-DDT00:00:00Z'),
+        plate_number: this.info.plate_number,
+        owner_name: this.info.owner_name,
+        start_date: moment(this.info.start_date).format('YYYY-MM-DDThh:mm:ss'),
+        end_date: moment(this.info.end_date).format('YYYY-MM-DDThh:mm:ss'),
       }
-      console.log(plateInfo)
+      const path = 'http://localhost:5000/plate';
+      axios.post(path, plateInfo)
+        .then(() => {
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.log(error);
+        });
     },
-  },
-  components: {
-    Datepicker,
   },
 };
 </script>
