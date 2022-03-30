@@ -1,26 +1,26 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeComponent from "@/components/HomeComponent";
-import AddPlateComponent from "@/components/AddPlateComponent";
-import ListPlatesComponent from "@/components/ListPlatesComponent";
+import HomePage from "@/components/HomePage";
+import AddPlate from "@/components/AddPlate";
+import ListPlates from "@/components/ListPlates";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'HomeComponent',
-    component: HomeComponent,
+    name: 'HomePage',
+    component: HomePage,
   },
   {
     path: '/add-plate',
-    name: 'AddPlateComponent',
-    component: AddPlateComponent,
+    name: 'AddPlate',
+    component: AddPlate,
   },
   {
     path: '/list-plates',
-    name: 'ListPlatesComponent',
-    component: ListPlatesComponent,
+    name: 'ListPlates',
+    component: ListPlates,
   },
 ];
 
