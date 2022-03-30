@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="container">
-      <form @submit.prevent="$emit('on-submit', info)">
+      <form @submit.prevent="addPlate()" method="post">
 
         <div class="form-group">
           <label for="plate-number">Plate number:</label>
@@ -23,7 +23,7 @@
           <input type="datetime-local" v-model="info.end_date" class="datepicker">
         </div>
 
-        <button type="submit" @click="addPlate()">Add Plate</button>
+        <button type="submit">Add Plate</button>
 
       </form>
     </div>
@@ -43,19 +43,22 @@ export default {
         start_date: '',
         end_date: '',
       },
+      response_data: '',
     };
   },
   methods: {
     addPlate() {
-      let plateInfo = {
-        plate_number: this.info.plate_number,
-        owner_name: this.info.owner_name,
-        start_date: moment(this.info.start_date).format('YYYY-MM-DDThh:mm:ss'),
-        end_date: moment(this.info.end_date).format('YYYY-MM-DDThh:mm:ss'),
-      }
+      let plateInfo = JSON.stringify({
+          plate_number: this.info.plate_number,
+          owner_name: this.info.owner_name,
+          start_date: moment(this.info.start_date).format('YYYY-MM-DDThh:mm:ss'),
+          end_date: moment(this.info.end_date).format('YYYY-MM-DDThh:mm:ss'),
+      })
+      console.log(plateInfo)
       const path = 'http://localhost:5000/plate';
       axios.post(path, plateInfo)
-        .then(() => {
+        .then((response) => {
+          this.response_data = response
         })
         .catch((error) => {
           // eslint-disable-next-line
