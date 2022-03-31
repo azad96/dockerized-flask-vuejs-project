@@ -23,7 +23,7 @@ def plate():
         parking_permits = db.session.query(PersonPlate, Person, Plate).join(Person).join(Plate).all()
 
         list_of_permits = [{
-            "owner": person_obj.name,
+            "owner_name": person_obj.name,
             "plate_number": plate_obj.plate_number,
             "start_date": plate_obj.start_date,
             "end_date": plate_obj.end_date
