@@ -51,8 +51,8 @@ export default {
       let plateInfo = JSON.stringify({
           plate_number: this.info.plate_number,
           owner_name: this.info.owner_name,
-          start_date: moment(this.info.start_date).format('YYYY-MM-DDThh:mm:ss'),
-          end_date: moment(this.info.end_date).format('YYYY-MM-DDThh:mm:ss'),
+          start_date: this.info.start_date ? moment(this.info.start_date).format('YYYY-MM-DDThh:mm:ss') : '',
+          end_date: this.info.end_date ? moment(this.info.end_date).format('YYYY-MM-DDThh:mm:ss') : '',
       })
       console.log(plateInfo)
       const path = 'http://localhost:5000/plate';
