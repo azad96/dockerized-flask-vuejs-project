@@ -8,7 +8,7 @@ import re
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@localhost:5432/park_tickets"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@postgres:5432/park_tickets"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app, resources={r'/*': {'origins': '*'}})
