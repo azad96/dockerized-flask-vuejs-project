@@ -33,21 +33,17 @@ def plate():
 
     if request.method == 'POST':
         req = json.loads(list(dict(request.form).keys())[0])
-        plate_pattern = re.compile(r"[a-zA-Z]{1,3}-[a-zA-Z]{1,2}[1-9][0-9]{0,3}")
-        print(req['plate_number'])
-        print(req['owner_name'])
-        print(req['start_date'])
-        print(req['end_date'])
+        plate_pattern = re.compile(r"[A-Z]{1,3}-[A-Z]{1,2}[1-9][0-9]{0,3}")
         if 'plate_number' not in req:
-            print('plate number is not in request')
             return {'response': 400}
         elif not plate_pattern.match(req['plate_number']):
-            print('plate number is not valid')
             return {'response': 422}
         else:
-            print('plate number is valid')
-            new_person = Person(req['owner_name'])
-            new_plate = Plate(req['plate_number'], req['start_date'], req['end_date'])
+            owner, plate_number = req['owner_name'], req['plate_number']
+            start_date = req['start_date'] if req['start_date'] else None
+            end_date = req['end_date'] if req['end_date'] else None
+            new_person = Person(owner)
+            new_plate = Plate(plate_number, start_date, end_date)
             db.session.add(new_person)
             db.session.add(new_plate)
             db.session.commit()
@@ -55,9 +51,6 @@ def plate():
             db.session.add(new_person_plate_mapping)
             db.session.commit()
             return {'response': 200}
-
-
-
 
 
 # Start the app
