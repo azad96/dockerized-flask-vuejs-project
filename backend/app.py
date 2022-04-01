@@ -25,8 +25,8 @@ def plate():
         list_of_permits = [{
             "owner_name": person_obj.name,
             "plate_number": plate_obj.plate_number,
-            "start_date": plate_obj.start_date,
-            "end_date": plate_obj.end_date
+            "start_date": plate_obj.start_date.strftime("%Y/%m/%dT%H:%M:%SZ") if plate_obj.start_date else '',
+            "end_date": plate_obj.end_date.strftime("%Y/%m/%dT%H:%M:%SZ") if plate_obj.end_date else ''
         } for _, person_obj, plate_obj in parking_permits]
 
         return jsonify(list_of_permits)
