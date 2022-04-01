@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: ./schemas
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: azad
+      POSTGRES_PASSWORD: 123123
+      POSTGRES_DB: park_tickets
+      POSTGRES_HOST: postgres
+    image: postgres:latest
+    restart: always
+
+  flask-api:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql://azad:123123@postgres:5432/park_tickets
+    depends_on:
+      - postgres
+
+  vue-app:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+
