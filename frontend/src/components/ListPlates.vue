@@ -1,25 +1,35 @@
 <template>
   <section>
     <div class="container">
-      <input type="text" v-model="search" placeholder="Search Plate/Owner">
-      <table class="table">
+      <input type="text" v-model="search" placeholder="Search by Plate/Owner">
+      <sorted-table :values="filteredPlates">
         <thead>
         <tr>
-          <th>Plate Number</th>
-          <th>Owner Name</th>
-          <th>Start Date</th>
-          <th>End Date</th>
+          <th scope="col" style="text-align: left; width: 10rem;">
+            <sort-link name="plate_number">Plate Number</sort-link>
+          </th>
+          <th scope="col" style="text-align: left; width: 10rem;">
+            <sort-link name="owner_name">Owner Name</sort-link>
+          </th>
+          <th scope="col" style="text-align: left; width: 10rem;">
+            <sort-link name="start_date">Start Date</sort-link>
+          </th>
+          <th scope="col" style="text-align: left; width: 10rem;">
+            <sort-link name="end_date">End Date</sort-link>
+          </th>
         </tr>
         </thead>
-        <tbody>
-        <tr v-for="plate in filteredPlates" :key="plate.id">
-          <td>{{ plate.plate_number }}</td>
-          <td>{{ plate.owner_name }}</td>
-          <td>{{ plate.start_date }}</td>
-          <td>{{ plate.end_date }}</td>
-        </tr>
-        </tbody>
-      </table>
+        <template #body="sort">
+          <tbody>
+          <tr v-for="plate in sort.values" :key="plate.id">
+            <td>{{ plate.plate_number }}</td>
+            <td>{{ plate.owner_name }}</td>
+            <td>{{ plate.start_date }}</td>
+            <td>{{ plate.end_date }}</td>
+          </tr>
+          </tbody>
+        </template>
+      </sorted-table>
     </div>
   </section>
 </template>
@@ -30,7 +40,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      plates: '',
+      plates: [],
       search: '',
     };
   },
@@ -39,7 +49,9 @@ export default {
       const path = 'http://localhost:5000/plate';
       axios.get(path)
         .then((res) => {
-          this.plates = res.data;
+          this.plates = Object.keys(res.data).map((key) => {
+            return res.data[key]
+          })
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -51,8 +63,8 @@ export default {
     this.getPlates();
   },
   computed: {
-    filteredPlates: function() {
-      return Object.values(this.plates).filter((plate) => {
+    filteredPlates: function () {
+      return this.plates.filter((plate) => {
         return plate.plate_number.toLowerCase().match(this.search) || plate.owner_name.toLowerCase().match(this.search);
       });
     }
