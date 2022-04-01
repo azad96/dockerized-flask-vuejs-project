@@ -1,20 +1,20 @@
 <template>
   <section>
     <div class="container">
-      <input type="text" v-model="search" placeholder="Search by Plate/Owner">
+      <input type="text" style="margin-bottom: 20px" v-model="search" placeholder="Search by Plate/Owner">
       <sorted-table :values="filteredPlates">
         <thead>
         <tr>
-          <th scope="col" style="text-align: left; width: 10rem;">
+          <th scope="col" style="text-align: center; width: 20rem;">
             <sort-link name="plate_number">Plate Number</sort-link>
           </th>
-          <th scope="col" style="text-align: left; width: 10rem;">
+          <th scope="col" style="text-align: center; width: 20rem;">
             <sort-link name="owner_name">Owner Name</sort-link>
           </th>
-          <th scope="col" style="text-align: left; width: 10rem;">
+          <th scope="col" style="text-align: center; width: 20rem;">
             <sort-link name="start_date">Start Date</sort-link>
           </th>
-          <th scope="col" style="text-align: left; width: 10rem;">
+          <th scope="col" style="text-align: center; width: 20rem;">
             <sort-link name="end_date">End Date</sort-link>
           </th>
         </tr>

@@ -35,27 +35,11 @@ section {
 
 .container {
   width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0px 0px 20px #00000033;
   border-radius: 8px;
-}
-
-.date-block {
-  display: inline-block;
-  width: 60%;
-  padding: 5px;
-  font-size: 18px;
-  margin-top: 5px;
-  margin-left: 10px;
-  font-size: 20px;
-}
-
-.form-group {
-  margin-top: 20px;
-  font-size: 20px;
-  color: #9e9e9e;
 }
 
 .form-group input {
