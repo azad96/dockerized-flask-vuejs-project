@@ -1,1 +1,0 @@
-# peter-park-coding-challenge
